@@ -14,17 +14,23 @@
 ActiveRecord::Schema.define(version: 20160511171609) do
 
   create_table "agents", force: :cascade do |t|
-    t.integer "person_id"
+    t.integer "company_id"
+    t.string  "name"
     t.string  "number"
   end
 
   create_table "bonds", force: :cascade do |t|
     t.integer  "agent_id"
-    t.integer  "person_id"
+    t.integer  "client_id"
+    t.integer  "court_id"
     t.string   "number"
     t.date     "date"
     t.datetime "court_date"
-    t.integer  "court_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.date   "dob"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -39,14 +45,10 @@ ActiveRecord::Schema.define(version: 20160511171609) do
 
   create_table "cosigners", force: :cascade do |t|
     t.integer "bonds_id"
-    t.integer "persons_id"
+    t.integer "clients_id"
   end
 
   create_table "courts", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "people", force: :cascade do |t|
     t.string "name"
   end
 
